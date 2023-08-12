@@ -1,0 +1,1 @@
+//hardcodeo de generos
