@@ -43,7 +43,7 @@ const Marketplace: React.FC = () => {
   useEffect(() => {
     // Obtener las opciones únicas para los filtros
     /* const languages = Array.from(new Set(products.map(product => product.language.toLowerCase()))); */
-    const genres = Array.from(new Set(products.flatMap(product => product.genre)));
+    /* const genres = Array.from(new Set(products.flatMap(product => product.genre))); */
 
     setUniqueLanguages(languages);
     setUniqueGenres(genres);
