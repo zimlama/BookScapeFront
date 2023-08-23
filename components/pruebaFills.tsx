@@ -39,15 +39,16 @@ const Marketplace: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const productsPerPage = 10; // Cambia este valor según tus necesidades
-
+/*
   useEffect(() => {
     // Obtener las opciones únicas para los filtros
-    /* const languages = Array.from(new Set(products.map(product => product.language.toLowerCase()))); */
-    /* const genres = Array.from(new Set(products.flatMap(product => product.genre))); */
+    const languages = Array.from(new Set(products.map(product => product.language.toLowerCase())));
+    const genres = Array.from(new Set(products.flatMap(product => product.genre)));
 
     setUniqueLanguages(languages);
     setUniqueGenres(genres);
   }, []);
+  */
 
   useEffect(() => {
     // Filtrar productos basados en los filtros seleccionados
