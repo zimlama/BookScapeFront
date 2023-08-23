@@ -1,0 +1,138 @@
+.imageContainer{
+  margin: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  background-color: #fff;
+  /* box-shadow: 0 2px 4px rgba(211, 210, 210, 0.1); */
+}
+
+.cardContent{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(57, 57, 57);
+  text-align: center;
+  line-height: 14px;
+}
+.card {
+  text-decoration: none;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.5s;
+
+
+}
+
+.card:hover {
+  opacity: 60%;
+  transform: translateY(-10px);
+  transition: 0.5s;
+
+
+}
+
+.title {
+  font-size: .8em;
+
+}
+
+.image {
+  
+  margin-top: 1cqi;
+  height: 15rem;
+ 
+
+}
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 150px;
+
+  }
+
+  .image {
+    height: 10rem;
+  }
+}
+
+.card-content {
+  flex: 10;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.card.authors{
+  color: rgb(135, 16, 16);
+  font-size: 1.9em;
+}
+
+.card-price,
+.card-genre {
+  color: aqua;
+}
+
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 1em;
+  }
+  .image {
+    height: 15rem;
+  }
+  .card {
+    height: 15rem;
+    width: 100%;
+    padding: 20px;
+    background-color: #e4e4e412;
+    margin-left: 0%;
+    white-space: 10px;
+  }
+
+  .imageContainer{
+    margin: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    background-color: #cecfcf24;
+    /* box-shadow: 0 2px 4px rgba(211, 210, 210, 0.1); */
+  }
+  
+  .cardContent{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(57, 57, 57);
+    text-align: center;
+    line-height: 14px;
+  }
+  .card {
+    text-decoration: none;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s;
+  
+  
+  }
+}
+
+.button {
+  background-color: #c50d0d;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  margin: 15px;
+}
+
+.button:hover {
+  background-color: #d33434;
+}

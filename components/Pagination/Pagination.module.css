@@ -1,0 +1,35 @@
+.button__pagination {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: linear-gradient(180deg, #4c4b4b 26.71%, #190d01 99.36%);
+    font-size: 20px;
+    border: 1px solid rgb(168, 0, 0);
+    color: rgb(255, 255, 255);
+    border-radius: 16%;
+    margin-right: 3px;
+    
+  
+  
+  
+  }
+  .b__active {
+    background: rgb(168, 0, 0);
+    cursor: pointer;
+    border: 1px solid white;
+    color: white;
+  }
+  
+  .button__pagination:hover {
+    background: rgb(168, 0, 0);
+    cursor: pointer;
+    border: 1px solid white;
+    color: rgb(255, 255, 255);
+  }
+  
+  .container__pagination{
+  text-align: center;
+
+
+  
+  
+  }

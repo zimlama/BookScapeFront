@@ -1,0 +1,158 @@
+.container{
+    background: linear-gradient(180deg, #f6f5f5 26.71%, #929292 99.36%);
+    margin-top: 20px;
+    margin-left: 2.5%;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.izquierda{
+    width: 25%;
+    padding: 20px;
+}
+.derecha{
+    width: 75%;
+    margin: 25px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border-radius: 10px;
+    box-shadow: 0 10px 1cap rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.imagen {
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    }
+    .imagen img{
+        width: 12rem;
+        text-align: center;
+        padding: 2px;
+        }
+
+.descripcion{
+    padding: 20px;
+text-align: justify;
+    }
+
+.detalles{
+        width: 98%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 20px ;
+        background-color: rgba(255, 255, 255, 0.421);
+        border-radius: 10px;
+        padding: 10px;
+        }
+
+.formulario{
+    width: 300px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 5px;
+    gap: 0.1rem;
+    row-gap: 0.1rem;
+ 
+
+
+
+}
+
+    .button {
+  background-color: #c50d0d;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 3%;
+
+}
+
+.button:hover {
+  background-color: #d33434;
+}
+
+
+@media (max-width: 700px){
+
+    .container{
+        background: linear-gradient(180deg, #f6f5f5 26.71%, #929292 99.36%);
+        margin-top: 2px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    }
+    
+    .izquierda{
+        width: 100%;
+        padding: 5px;
+    }
+    .derecha{
+        width: 100%;
+        margin: 5px;
+        padding: 2px;
+        background-color: rgba(255, 255, 255, 0.33);
+        border-radius: 10px;
+        box-shadow: 0 10px 1cap rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(3.5px);
+    
+    }
+    
+    .imagen  img{
+        width: 14rem;
+        text-align: center;
+        padding: 2px;
+        }
+    
+    .descripcion{
+        padding: 20px;
+    text-align: justify;
+        }
+    
+        .detalles{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: first baseline;
+            background-color: rgba(255, 255, 255, 0.421);
+            border-radius: 10px;
+            padding: 1px;
+            width: 100%;
+            }
+    
+        .button {
+      background-color: #c50d0d;
+      color: #fff;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top:5%;
+      align-items: baseline;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .button:hover {
+      background-color: #d33434;
+    }
+
+}
