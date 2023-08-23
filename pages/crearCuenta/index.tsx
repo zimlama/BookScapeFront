@@ -41,7 +41,7 @@ const Crearcuenta = () => {
         password: password,
       };
 
-      await axios.post("http://localhost:3001/users", nuevoUsuario);
+      await axios.post("https://bookscapeback-production.up.railway.app/users", nuevoUsuario);
 
       router.push("/login");
     } catch (error: any) {
