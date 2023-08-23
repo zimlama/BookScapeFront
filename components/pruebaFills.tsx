@@ -1,8 +1,8 @@
 // Marketplace.tsx
 import React, { useState, useEffect } from 'react';
-import products from './data'; // Importa la matriz de productos desde el archivo data.ts
+/* import products from './data'; // Importa la matriz de productos desde el archivo data.ts
 import Card from './Card'; // Importa tu componente Card
-import Pagination from './pagination'; // Importa el componente Pagination
+import Pagination from './pagination'; // Importa el componente Pagination */
 import styles from './Marketplace.module.css'; // Importa los estilos si estás utilizando módulos de estilo
 
 interface Product {
