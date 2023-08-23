@@ -71,7 +71,8 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/");
+      /* const response = await axios.get("http://localhost:3001/books/"); */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/");
       const booksWithRandomRating = response.data.map((book: Book) => ({
         ...book,
         rating_ave:
@@ -106,7 +107,8 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchLanguages = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/language");
+      /* const response = await axios.get("http://localhost:3001/books/language"); */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/language");
       const languages = response.data.map((language: Language) => language.language);
       setUniqueLanguages(languages);
     } catch (error) {
@@ -116,7 +118,8 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchTags = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/tags");
+      /* const response = await axios.get("http://localhost:3001/books/tags"); */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/tags");
       const tags = response.data.map((tag: Tags) => tag.name);
       setUniqueTags(tags);
     } catch (error) {
@@ -126,7 +129,8 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchAuthors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/authors");
+      /* const response = await axios.get("http://localhost:3001/books/authors"); */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/authors");
       const authors = response.data.map((author: Authors) => author.name);
       setUniqueAuthors(authors);
     } catch (error) {
@@ -139,7 +143,8 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const applyFilters = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/filter", {
+      /* const response = await axios.get("http://localhost:3001/books/filter", { */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/filter", {
         params: {
           tags: filters.selectedTags.join(","),
           language: filters.language,

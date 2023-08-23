@@ -58,7 +58,8 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/books/");
+      /* const response = await axios.get("http://localhost:3001/books/"); */
+      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/");
       const booksWithRandomRating = response.data.map((book: Book) => ({
         ...book,
         rating_ave:
