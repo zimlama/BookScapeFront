@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {
   createContext,
   useContext,
@@ -9,7 +10,7 @@ import React, {
 import { useAuthContext } from "@/context/AuthContext";
 
 interface CartItem {
-  id: number;
+  id_book: number;
   title: string;
   price: number;
   image: string;
@@ -37,35 +38,64 @@ export const useCartContext = (): CartContextType => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { user, isAuthenticated, rutaLogin } = useAuthContext();
   const initialState: CartItem[] = [];
   const [cartItems, setCartItems] = useState<CartItem[]>(initialState);
+  console.log(user);
 
   useEffect(() => {
-    const carritoLS = JSON.parse(
-      localStorage.getItem("cart") || "null"
-    ) as CartItem[];
-    if (carritoLS) {
-      setCartItems(carritoLS);
+    if (!user) {
+      const carritoLS = JSON.parse(
+        localStorage.getItem("cart") || "null"
+      ) as CartItem[];
+      if (carritoLS) {
+        setCartItems(carritoLS);
+      }
     }
-  }, []); // Solo dependencias primitivas
+  }, [user]); // Solo dependencias primitivas
 
   useEffect(() => {
-    if (cartItems !== initialState) {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
+    if (!user) {
+      if (cartItems !== initialState) {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+      }
     }
   }, [cartItems]);
 
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/shoppingcart/books/${user.shoppingcartId.cart_id}`
+          );
+
+          // Agregar la propiedad "cantidad" a cada elemento en el array
+          const cartItemsWithCantidad = response.data.Books.map((book: CartItem) => ({
+            ...book,
+            cantidad: 1, // Puedes establecer la cantidad inicial según tus necesidades
+          }));
+
+          setCartItems(response.data.Books);
+        } catch (error) {}
+      };
+      fetchData();
+    }
+  }, [user]);
+
+  console.log(cartItems);
+  
+
   const agregarCarrito = (cart: CartItem): void => {
-    if (cartItems.some((cartState) => cartState.id === cart.id)) {
+    if (cartItems.some((cartState) => cartState.id_book === cart.id_book)) {
       const carritoActualizado = cartItems.map((cartState) => {
-        if (cartState.id === cart.id) {
+        if (cartState.id_book === cart.id_book) {
           cartState.cantidad = cart.cantidad;
         }
         return cartState;
       });
 
       setCartItems([...carritoActualizado]);
-
       localStorage.setItem("cart", JSON.stringify(cartItems));
     } else {
       setCartItems([...cartItems, cart]);
@@ -73,15 +103,16 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+
   const eliminarProducto = (id: number): void => {
-    const carritoActualizado = cartItems.filter((cart) => cart.id !== id);
+    const carritoActualizado = cartItems.filter((cart) => cart.id_book !== id);
     setCartItems(carritoActualizado);
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
   };
 
   const actualizarCantidad = (cart: CartItem): void => {
     const carritoActualizado = cartItems.map((cartState) => {
-      if (cartState.id === cart.id) {
+      if (cartState.id_book === cart.id_book) {
         (cartState.cantidad = cart.cantidad), 10;
       }
       return cartState;

@@ -46,8 +46,7 @@
   
   margin-top: 1cqi;
   height: 15rem;
- 
-
+  max-width: 10rem;
 }
 
 @media screen and (max-width: 1200px) {

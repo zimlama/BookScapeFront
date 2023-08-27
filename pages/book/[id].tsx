@@ -5,8 +5,11 @@ import styles from "./detail.module.css";
 import Rating from "../../components/Rating/Rating";
 import Link from "next/link";
 import { useCartContext } from "@/context/CartContext";
+import { useCartBdContext } from "@/context/CartBdContext";
+import { useAuthContext } from "@/context/AuthContext";
 
 const DetallesBook = () => {
+  const { user, isAuthenticated } = useAuthContext();
   const [cantidad, setCantidad] = useState(1);
   const { books } = useBookContext();
   const {
@@ -15,7 +18,8 @@ const DetallesBook = () => {
 
   const detallebook = books.find((book) => book.id_book === Number(id));
 
-  const { agregarCarrito, cartItems } = useCartContext();
+  const { agregarCarrito } = useCartContext();
+  const { agregarCarritoBd } = useCartBdContext();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -27,7 +31,7 @@ const DetallesBook = () => {
 
     if (detallebook) {
       const cartItem = {
-        id: detallebook.id_book,
+        id_book: detallebook.id_book,
         title: detallebook.title,
         price: detallebook.price,
         image: detallebook.image,
@@ -35,7 +39,40 @@ const DetallesBook = () => {
         cantidad,
       };
 
-      agregarCarrito(cartItem);
+      if (user && isAuthenticated()) {
+        agregarCarritoBd(cartItem);
+      } else {
+        agregarCarrito(cartItem);
+      }
+
+      // Primero, obtén el array actual de cantidadDb del localStorage (si existe)
+      const storedCantidadDb = JSON.parse(
+        localStorage.getItem("cantidad") || "[]"
+      );
+
+      // Luego, verifica si el usuario está autenticado y hay un cartItem
+      if (user && isAuthenticated() && cartItem) {
+        // Verifica si ya existe un objeto con el mismo id_book en el array
+        const existingIndex = storedCantidadDb.findIndex(
+          (item: any) => item.id_book === cartItem.id_book
+        );
+
+        // Si existe, actualiza la cantidad en el objeto existente
+        if (existingIndex !== -1) {
+          storedCantidadDb[existingIndex].cantidad = cartItem.cantidad;
+        } else {
+          // Si no existe, crea un nuevo objeto para el nuevo elemento
+          const newCantidadObj = {
+            id_book: cartItem.id_book,
+            cantidad: cartItem.cantidad,
+          };
+          // Agrega el nuevo objeto al array almacenado
+          storedCantidadDb.push(newCantidadObj);
+        }
+
+        // Guarda el array actualizado en el localStorage
+        localStorage.setItem("cantidad", JSON.stringify(storedCantidadDb));
+      }
     }
   };
 
@@ -62,36 +99,42 @@ const DetallesBook = () => {
               <p> {detallebook.description}</p>
             </div>
             <div className={styles.detalles}>
-              <div><h3>Genero: </h3>{detallebook.Tags.map((tag) => tag.name)}</div>
+              <div>
+                <h3>Genero: </h3>
+                {detallebook.Tags.map((tag) => tag.name)}
+              </div>
               <div>
                 <h2>${detallebook.price}</h2>
               </div>
 
               <div className={styles.formulario}>
                 <form onSubmit={handleSubmit}>
-                  <div> <label htmlFor="cantidad">Cantidad:</label>
-                  <select
-                    id="cantidad"
-                    onChange={(e) => setCantidad(+e.target.value)}
-                  >
-                    <option value="0"></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select></div>
-                  <div><input 
-                    type="submit"
-                    value="Agregar al carrito "
-                    className={styles.button}
-                  /></div>
-                  <div><Link href={`/`} >
-                    <button className={styles.button}>
-                      Regresar
-                    </button>
-                  </Link></div>
-                
+                  <div>
+                    {" "}
+                    <label htmlFor="cantidad">Cantidad:</label>
+                    <select
+                      id="cantidad"
+                      onChange={(e) => setCantidad(+e.target.value)}
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input
+                      type="submit"
+                      value="Agregar al carrito "
+                      className={styles.button}
+                    />
+                  </div>
+                  <div>
+                    <Link href={`/`}>
+                      <button className={styles.button}>Regresar</button>
+                    </Link>
+                  </div>
                 </form>
               </div>
             </div>

@@ -64,7 +64,12 @@
   backdrop-filter: blur(3.5px);
 }
 
-.imagen img {
+.imagen {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espacio entre el checkbox y la imagen */
+}
+.imagen img{
   width: 10rem;
   padding: 20px;
 }

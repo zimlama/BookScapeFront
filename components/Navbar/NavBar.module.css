@@ -172,6 +172,15 @@
   .salir img{
     width: 20px;
     margin-top: 3rem;
+    transition: all 0.5s;
+  
+  }
+
+  .salir img:hover {
+    opacity: 60%;
+    transform: translateY(-10px);
+    transition: 0.5s;
+  
   
   }
   

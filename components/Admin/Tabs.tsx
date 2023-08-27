@@ -3,13 +3,13 @@ import styles from "../../pages/admin/styles.module.css";
 
 type TabsProps = {
   tabs: {
-    label: string;
+    label: React.ReactNode;
     index: number;
     Component: FC<{ index: number }>;
   }[];
   selectedTab: number;
   onClick: (index: number) => void;
-  orientation?: "horizontal" | "horizontal";
+  orientation?: "vertical" | "vertical";
   className?: string;
 };
 
@@ -26,14 +26,14 @@ const Tabs: FC<TabsProps> = ({
   tabs = [],
   selectedTab = 0,
   onClick,
-  orientation = "horizontal"
+  orientation = "vertical"
 }) => {
   const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
 
   return (
     <div
       className={
-        orientation === "horizontal" ? className + " horizontal" : className
+        orientation === "vertical" ? className + " vertical" : className
       }
     >
       <div role="tablist" aria-orientation={orientation}>

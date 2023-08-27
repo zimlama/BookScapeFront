@@ -3,6 +3,7 @@ import { useBookContext } from "@/context/BookContext";
 import styles from "./BookSlider.module.css";
 import Rating from "../Rating/Rating";
 import { useAuthContext } from "@/context/AuthContext";
+import promo from "../../public/images/promo.png"
 import Link from 'next/link';
 
 const BooksSlider: React.FC = () => {
@@ -79,6 +80,7 @@ const BooksSlider: React.FC = () => {
             <br />
           </Link>}</div>
                   </div>
+                  <div className={styles.promo}><img src={promo.src} alt="Promocion"/></div>
                 </div>
              
             </div>

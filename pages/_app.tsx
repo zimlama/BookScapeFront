@@ -9,6 +9,7 @@ import { UsuarioProvider } from "@/context/UsuarioContext";
 import { useEffect } from "react";
 import axios from "axios";
 import { CartProvider } from "@/context/CartContext";
+import { CartBdProvider } from "@/context/CartBdContext";
 import { FilterProvider } from "@/context/FilterContext";
 import { AuthProvider } from "@/context/AuthContext";
 /**
@@ -32,12 +33,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UsuarioProvider>
         <AuthProvider>
           <CartProvider>
+          <CartBdProvider>
             <FilterProvider>
               <Layout>
                 {/* El componente Layout envuelve cada página */}
                 <Component {...pageProps} />
               </Layout>
             </FilterProvider>
+          </CartBdProvider>
           </CartProvider>
         </AuthProvider>
       </UsuarioProvider>
