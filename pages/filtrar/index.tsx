@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useFilterContext } from "@/context/FilterContext";
 import CardsBooks from "@/components/CardsBooks/CardsBooks";
 import styles from "../../styles/Home.module.css";
-import autor from "../../public/images/autor.png";
+import BooksSlider from "@/components/BookSlider/BookSlider"
 import Pagination from "@/components/Pagination/Pagination";
 import Filtros from "@/components/Filters/Filters";
 
@@ -72,9 +72,7 @@ const Filtrar: React.FC = () => {
         <div>
           <h3 className={styles.h1}>Libro Destacado</h3>
         </div>
-        <div className={styles.autor}>
-          <img src={autor.src} alt="autor" />
-        </div>
+        <BooksSlider />
       </div>
     </div>
   );

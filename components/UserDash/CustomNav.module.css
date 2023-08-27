@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+
+.navbarMenu {
+  height:100vh;
+  transition: all 0.5s ease;
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.15);
+  
+  
+}
+.burger{
+  display:flex;
+  justify-content: flex-end;
+
+}
+.burger img {
+  padding: 25px 8px 0px 0px;
+  cursor: pointer;
+  margin-top: 130px;
+}
+.navbar__list {
+  list-style-type: none;
+  margin-left: -35px;
+
+
+  
+}
+.navbarli {
+  display:inline-block;
+  padding:10px 0px 0px 12px;
+  position: relative;
+  top:2.5px;
+  left: 5px;
+  font-size: 16px;
+  letter-spacing: 0px;
+  line-height: 38px;
+  color: black;
+  font-family: "Lato";
+
+  
+  
+}
+/*margen superior*/
+.navbar__liBox:first-child {
+  margin-top:15px;
+  
+}
+/*espacio entre botones*/
+.navbar__liBox {
+  height: 43px;
+  margin-top:15px;
+}
+.navbar__liBox:hover {
+  border-left: 7px solid rgb(195, 2, 2);
+  cursor: pointer;
+}

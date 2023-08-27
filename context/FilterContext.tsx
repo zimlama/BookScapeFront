@@ -1,6 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
+
+
+const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK; // Obtiene la URL base del archivo .env.local
+console.log("esto es: ", process.env.NEXT_PUBLIC_BOOKSCAPEBACK);
+console.log("esto es: ", bookscapeback);
+const booksUrl = `${process.env.NEXT_PUBLIC_BOOKSCAPEBACK}/books/`; // Construye la URL completa
+console.log("esto es: ", booksUrl);
+const languageUrl = `${bookscapeback}/books/language`; // Construye la URL completa
+const tagsUrl = `${bookscapeback}/books/tags`; // Construye la URL completa
+const authorsUrl = `${bookscapeback}/books/authors`; // Construye la URL completa
+const filterUrl = `${bookscapeback}/books/filter`; // Construye la URL completa
+
+
 interface FilterState {
   price: number;
   language: string;
@@ -71,8 +84,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchBooks = async () => {
     try {
-      /* const response = await axios.get("http://localhost:3001/books/"); */
-      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/");
+      const response = await axios.get(booksUrl);
       const booksWithRandomRating = response.data.map((book: Book) => ({
         ...book,
         rating_ave:
@@ -107,8 +119,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchLanguages = async () => {
     try {
-      /* const response = await axios.get("http://localhost:3001/books/language"); */
-      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/language");
+      const response = await axios.get(languageUrl);
       const languages = response.data.map((language: Language) => language.language);
       setUniqueLanguages(languages);
     } catch (error) {
@@ -118,8 +129,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchTags = async () => {
     try {
-      /* const response = await axios.get("http://localhost:3001/books/tags"); */
-      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/tags");
+      const response = await axios.get(tagsUrl);
       const tags = response.data.map((tag: Tags) => tag.name);
       setUniqueTags(tags);
     } catch (error) {
@@ -129,8 +139,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const fetchAuthors = async () => {
     try {
-      /* const response = await axios.get("http://localhost:3001/books/authors"); */
-      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/authors");
+      const response = await axios.get(authorsUrl);
       const authors = response.data.map((author: Authors) => author.name);
       setUniqueAuthors(authors);
     } catch (error) {
@@ -143,8 +152,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const applyFilters = async () => {
     try {
-      /* const response = await axios.get("http://localhost:3001/books/filter", { */
-      const response = await axios.get("https://bookscapeback-production.up.railway.app/books/filter", {
+      const response = await axios.get(filterUrl, {
         params: {
           tags: filters.selectedTags.join(","),
           language: filters.language,

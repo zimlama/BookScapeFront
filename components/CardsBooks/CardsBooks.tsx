@@ -1,5 +1,6 @@
 import CardBook from "../CardBook/CardBook";
 import styles from "./CardsBooks.module.css";
+
 type Author = {
   name: string;
   // Agrega otras propiedades si es necesario

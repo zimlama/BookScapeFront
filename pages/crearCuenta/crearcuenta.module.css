@@ -1,15 +1,14 @@
 .container {
   margin: auto;
-  margin-top: 30px;
-  max-width: 400px;
-  padding: 20px;
+  margin-top: 12px;
+  max-width: 350px;
+  padding: 0px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 234, 255, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100%;
-
 }
 
 .input {
@@ -21,6 +20,7 @@
 }
 
 .button {
+  width: 97%;
   background-color: #c50d0d;
   color: #fff;
   padding: 10px 20px;
@@ -38,8 +38,6 @@
   font-size: smaller;
 }
 
-
-
 .input2{
   border-radius: 15px;
   width: 200px;
@@ -49,9 +47,14 @@
   background-color: rgba(208, 209, 209, 0.767);
 }
 
+.logo1 {
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+}
 .logo2 {
-  width: 150px;
-  text-align: center;
+  width: 180px;
 }
 
 

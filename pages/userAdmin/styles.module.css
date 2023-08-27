@@ -1,0 +1,23 @@
+.contenedor{
+    display: flex;
+
+    background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
+    width: 100%;
+}
+
+.logo img{
+    width: 250px;
+    margin: auto;
+    padding: 20px;
+
+}
+
+.links{
+    text-decoration: none;
+    color: rgb(62, 62, 62);
+}
+
+.der{
+    background-color: rgba(255, 255, 255, 0.713);
+    width:76%;
+}

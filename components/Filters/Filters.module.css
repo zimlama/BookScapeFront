@@ -2,7 +2,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 90%;
 
 }
 
@@ -12,7 +12,7 @@
 
 .container {
     margin: auto;
-    margin-top: 1;
+    margin-top: 1px;
     max-width: 400px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -20,7 +20,7 @@
     background-color: #95949431;
     box-shadow: 0 2px 4px rgba(0, 234, 255, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: auto;
+    height: 98%;
   }
   
   .input {
@@ -79,6 +79,7 @@
   
   .starFilled {
     color: gold;
+    font-size: 18px;
   }
   
   

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CardBook.module.css";
 import Link from "next/link";
 import Rating from "../Rating/Rating";
+import { CldImage } from 'next-cloudinary';
 
 type Author = {
   name: string;
@@ -37,15 +38,16 @@ const CardBook: React.FC<CardBookProps> = ({
         <div>
           <img src={image} alt={title} className={styles.image} />
           <Rating rating_ave={rating_ave} />
+          </div>{" "}
+          </Link>
           <div className={styles.cardContent}>
-            <h6 className={styles.title}>{title}</h6>
-            <h4 className={styles.cardAuthors}>{Authors.map((obj:any, index:any) => (
-    <div key={index}>{obj.name}</div>
-  ))}</h4>
+            <p className={styles.title}>{title}</p>
+            <p className={styles.cardAuthors}>{Authors.map((obj:any, index:any) => (
+           <span key={index}>{obj.name}</span>
+              ))}</p>
             <h3 className={styles.cardPrice}>${price}</h3>
           </div>
-        </div>{" "}
-      </Link>
+        
     </div>
   );
 };

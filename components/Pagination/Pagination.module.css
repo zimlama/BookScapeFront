@@ -1,19 +1,19 @@
 .button__pagination {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    background: linear-gradient(180deg, #4c4b4b 26.71%, #190d01 99.36%);
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background: linear-gradient(180deg, #878686 26.71%, #616161 99.36%);
     font-size: 20px;
     border: 1px solid rgb(168, 0, 0);
     color: rgb(255, 255, 255);
-    border-radius: 16%;
-    margin-right: 3px;
+    border-radius: 8px;
+    margin-right: 5px;
     
   
   
   
   }
   .b__active {
-    background: rgb(168, 0, 0);
+    background: rgba(168, 0, 0, 0.867);
     cursor: pointer;
     border: 1px solid white;
     color: white;

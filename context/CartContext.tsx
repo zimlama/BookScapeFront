@@ -6,6 +6,8 @@ import React, {
   useEffect,
 } from "react";
 
+import { useAuthContext } from "@/context/AuthContext";
+
 interface CartItem {
   id: number;
   title: string;
@@ -35,10 +37,9 @@ export const useCartContext = (): CartContextType => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  
   const initialState: CartItem[] = [];
   const [cartItems, setCartItems] = useState<CartItem[]>(initialState);
-  
+
   useEffect(() => {
     const carritoLS = JSON.parse(
       localStorage.getItem("cart") || "null"
@@ -46,7 +47,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     if (carritoLS) {
       setCartItems(carritoLS);
     }
-  }, []);
+  }, []); // Solo dependencias primitivas
 
   useEffect(() => {
     if (cartItems !== initialState) {
@@ -62,7 +63,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         }
         return cartState;
       });
+
       setCartItems([...carritoActualizado]);
+
       localStorage.setItem("cart", JSON.stringify(cartItems));
     } else {
       setCartItems([...cartItems, cart]);

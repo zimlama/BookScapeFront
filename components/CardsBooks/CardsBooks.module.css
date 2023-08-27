@@ -1,8 +1,7 @@
 .container {
-
-  @media screen and(min-width: 200px);
+  min-width: 200px;
   grid-template-columns: repeat(1, 2%);
-    display: flex;
+  display: flex;
   flex-direction: column;
   gap: 1px;
   padding: 10px;
@@ -10,7 +9,6 @@
   grid-gap: 0.3%;
   margin-right: 0px;
   margin-top: 40px;
-
 }
 
 @media screen and (min-width: 800px) {
@@ -21,7 +19,6 @@
     padding: 10px;
     justify-content: center;
     grid-gap: 0.3%;
-
   }
 }
 @media screen and (min-width: 1200px) {
@@ -29,7 +26,5 @@
     grid-template-columns: repeat(5, 1fr);
     grid: -0.5%;
     gap: -10px;
-
-
   }
 }

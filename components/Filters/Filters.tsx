@@ -226,19 +226,11 @@ const Filtros: React.FC = () => {
       )}
       <br/>
       {/* estrellas */}
-      <label style={{ fontWeight: "bold" }}>Reseña del Cliente</label>
+      <label style={{ fontWeight: "bold" }}>Más valorados</label>
       {[5, 4, 3, 2, 1].map((rating) => (
         <div key={rating} className={styles.ratingOption}>
           <label>
-          {Array.from({ length: 5 }).map((_, index) => (
-        <span
-          key={index}
-          className={index < rating ? styles.starFilled : styles.star}
-        >
-          ★
-        </span>
-      ))} o más
-            <input
+          <input
               type="checkbox"
               value={rating}
               checked={filters.rating_ave === rating}
@@ -256,6 +248,16 @@ const Filtros: React.FC = () => {
                 }
               }}
             />
+        
+          {Array.from({ length: 5 }).map((_, index) => (
+        <span
+          key={index}
+          className={index < rating ? styles.starFilled : styles.star}
+        >
+          ★ 
+        </span>
+      ))}
+       {" "} o más       
           </label>
           <br/>
         </div>

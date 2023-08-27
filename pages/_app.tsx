@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { CartProvider } from "@/context/CartContext";
 import { FilterProvider } from "@/context/FilterContext";
+import { AuthProvider } from "@/context/AuthContext";
 /**
  * Componente raíz de la aplicación.
  * Envuelve cada página con el componente Layout para proporcionar una estructura común.
@@ -19,24 +20,26 @@ import { FilterProvider } from "@/context/FilterContext";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       // Configura el token en el encabezado de las solicitudes Axios
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
   }, []);
-  
+
   return (
     <BookProvider>
       <UsuarioProvider>
-      <CartProvider>
-        <FilterProvider>
-        <Layout>
-          {/* El componente Layout envuelve cada página */}
-          <Component {...pageProps} />
-        </Layout>
-        </FilterProvider>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <FilterProvider>
+              <Layout>
+                {/* El componente Layout envuelve cada página */}
+                <Component {...pageProps} />
+              </Layout>
+            </FilterProvider>
+          </CartProvider>
+        </AuthProvider>
       </UsuarioProvider>
     </BookProvider>
   );

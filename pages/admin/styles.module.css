@@ -1,0 +1,102 @@
+.contenedor {
+    text-align: center;
+    width: 70vw;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+
+  }
+  
+  .logo img {
+    width: 180px;
+    cursor: pointer;
+    margin-top: 0px;
+    margin: 10px;
+  }
+
+  .menu{
+    background-color: rgb(255, 255, 255);
+    width: 99%;
+    text-align: left;
+  }
+
+  .liner {
+    background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .h3 {
+    margin-top: 0;
+  }
+  
+  .tabComponent [role="tablist"] {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+  }
+  
+  .tabsComponent [role="tablist"] button {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin: 0 1px;
+    outline: none;
+    background-color: #d00000;
+    transition: border 0.2s ease-in-out 0s;
+  }
+  
+  .tabsComponent [role="tablist"] button.active,
+  .tabsComponent [role="tablist"] button:focus,
+  .tabsComponent [role="tablist"] button:hover {
+    border-width: 1px;
+    border-color: #e9ecef #e9ecef #b41c1c;
+  }
+  
+  .tabsComponent [role="tablist"] button.active {
+    color: #0080ff;
+    background-color: #f8f8f8;
+  }
+  
+  .tabsComponent [role="tabpanel"] {
+    text-align: left;
+    padding: 1rem;
+    background-color: #ff0aad;
+    box-shadow: 1px 1px 2px rgb(204 204 204 / 75%);
+  }
+  
+  .tabsComponent.vertical {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  .tabsComponent.vertical [role="tablist"] {
+    flex-direction: column;
+  }
+  
+  .tabsComponent.vertical [role="tabpanel"] {
+    flex: 1;
+  }
+  
+  .tabsComponent [role="tablist"] button {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0;
+  }
+  
+  .tabsComponent.vertical [role="tablist"] button.active,
+  .tabsComponent.vertical [role="tablist"] button:focus,
+  .tabsComponent.vertical [role="tablist"] button:hover {
+    border-color: #e9ecef transparent #e9ecef #b41c1c;
+  }
+  

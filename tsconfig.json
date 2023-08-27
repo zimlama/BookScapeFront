@@ -20,6 +20,6 @@
     },
     "baseUrl":"."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/pruebaFills.tsx.bkp"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

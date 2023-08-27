@@ -1,164 +1,227 @@
-.container{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    margin: auto;
-    margin-top: 1px;
-    margin-left: 1%;
-    max-width: 90%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  margin-top: 1px;
+  margin-left: 1%;
+  max-width: 90%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container2 {
-    width: 98%;
-    text-align: center;
-    line-height: 50px;
-    margin: auto;
-    margin-top: 30px;
-    max-width: 800px;
-    height: 100%;
-    padding: 20px;
+  width: 98%;
+  text-align: center;
+  line-height: 50px;
+  margin: auto;
+  margin-top: 1px;
+  max-width: 800px;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container2 p {
+  font-size: 12px;
+  line-height: 16px;
+}
+.container3 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 5px;
+  margin-bottom: 1px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo img {
+  width: 150px;
+}
+.izquierda {
+  width: 75%;
+  padding: 20px;
+}
+.derecha {
+  width: 25%;
+  margin: 25px;
+  padding: 20px;
+  background-color: rgba(221, 18, 18, 0.33);
+  border-radius: 10px;
+  box-shadow: 0 10px 1cap rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.5px);
+}
+
+.imagen img {
+  width: 10rem;
+  padding: 20px;
+}
+
+.descripcion {
+  padding: 20px;
+  text-align: justify;
+}
+
+.detalles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.421);
+  border-radius: 10px;
+}
+
+.button {
+  background-color: #c50d0d;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #d33434;
+}
+
+.contenido {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+}
+
+.carrito {
+  padding: 3rem 0;
+}
+
+.resumen {
+  background: linear-gradient(180deg, #ffffff 26.71%, #ebebeb 50%);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  position: fixed;
+  top: 10em;
+  right: 0;
+  width: 10em;
+  height: 15em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.resumen img {
+  width: 8rem;
+}
+
+.containerCar {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5rem;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.containerCar2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  background-color: white;
+}
+
+@media screen and (max-width: 800) {
+  .resumen {
+    background: linear-gradient(180deg, #ad0e0e 26.71%, #ebebeb 50%);
+    padding: 1rem;
+    border-radius: 1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
+    position: fixed;
+    top: 0em;
+    right: 12.5%;
+    width: 70%;
+    height: 4em;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  .container2 p{
-    font-size: 12px;
-    line-height: 16px;
-
-  }
-  .container3{
-    width: 100%;
+    font-size: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 50px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  
+    gap: 1rem;
+  }
+  .resumen img {
+    display: none;
   }
 
-  .logo img{
-    width: 150px;
+  .oculto {
+    display: none;
+  }
 
-  }  
-  .izquierda{
-    width: 75%;
-    padding: 20px;
-}
-.derecha{
-    width: 25%;
-
-    margin: 25px;
-    padding: 20px;
-    background-color: rgba(221, 18, 18, 0.33);
-    border-radius: 10px;
-    box-shadow: 0 10px 1cap rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3.5px);
-
-}
-
-.imagen 
-img{
-    width: 10rem;
-    padding: 20px;
-    }
-
-
-.descripcion{
-    padding: 20px;
-    text-align: justify;
-    }
-
-    .detalles{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.421);
-        border-radius: 10px;
-    }
-
-    .button {
-        background-color: #c50d0d;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      
-      .button:hover {
-        background-color: #d33434;
-      }
-
-   .contenido {
+  .containerCar2 {
     display: flex;
-    align-items: flex-start;
-    gap: 5rem;
-   }
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: white;
+  }
+}
 
-   .carrito {
-    padding: 3rem 0;
-   }
-
-   .resumen {   
+@media screen and (max-width: 500px) {
+  .resumen {
     background: linear-gradient(180deg, #ffffff 26.71%, #ebebeb 50%);
     padding: 1rem;
     border-radius: 1rem;
     border: 1px solid #ccc;
     position: fixed;
-    top: 6em;
-    right: 0;
-    width: 10em;
-    height: 20em;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    top: 0em;
+    right: 12.5%;
+    width: 70%;
+    height: 4em;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    margin-top: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  }
-    .resumen img{
-      width: 8rem;
-    }
-
-    
-  
-
-   .containerCar{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5rem;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  
-  }
-
-  .containerCar2{
+    font-size: 10px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .resumen img {
+    display: none;
+  }
+
+  .oculto {
+    display: none;
+  }
+
+  .containerCar2 {
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 2rem;
+    gap: 0.3rem;
     background-color: white;
-  
   }
+}

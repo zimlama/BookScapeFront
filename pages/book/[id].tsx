@@ -4,7 +4,6 @@ import { useBookContext } from "@/context/BookContext";
 import styles from "./detail.module.css";
 import Rating from "../../components/Rating/Rating";
 import Link from "next/link";
-import { IoIosCart } from "react-icons/io";
 import { useCartContext } from "@/context/CartContext";
 
 const DetallesBook = () => {

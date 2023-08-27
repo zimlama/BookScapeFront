@@ -8,6 +8,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import logo2 from "../../public/images/BookScapeLogo.png";
 
+const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK; // Obtiene la URL base del archivo .env.local
+const usersUrl = `${bookscapeback}/users`; // Construye la URL completa
+
 const STATE_INICIAL = {
   nombre: "",
   email: "",
@@ -19,17 +22,12 @@ const Crearcuenta = () => {
   const router = useRouter();
   const [error, guardarError] = useState<string | null>(null);
 
-  const {
-    valores,
-    errores,
-    handleSubmit,
-    handleChange,
-    handleBlur,
-  } = useValidacion({
-    stateInicial: STATE_INICIAL,
-    validar: validarCrearCuenta,
-    fn: crearCuenta,
-  });
+  const { valores, errores, handleSubmit, handleChange, handleBlur } =
+    useValidacion({
+      stateInicial: STATE_INICIAL,
+      validar: validarCrearCuenta,
+      fn: crearCuenta,
+    });
 
   const { nombre, email, password, passwordRepetida } = valores;
 
@@ -41,7 +39,7 @@ const Crearcuenta = () => {
         password: password,
       };
 
-      await axios.post("https://bookscapeback-production.up.railway.app/users", nuevoUsuario);
+      await axios.post(usersUrl, nuevoUsuario);
 
       router.push("/login");
     } catch (error: any) {
@@ -50,82 +48,100 @@ const Crearcuenta = () => {
     }
   }
   return (
-    <div className={styles.container}>
-          <img className={styles.logo2} src={logo2.src} alt="" />
-         <h1>Crear Cuenta</h1>
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="nombre">Tu nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            placeholder="Nombres y Apellidos"
-            name="nombre"
-            className={styles.input}
-            value={nombre}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </div>
-        {errores.nombre && <p className={styles.alert}>{errores.nombre}</p>}
-        <div>
-          <label htmlFor="email">Correo electrónico</label>
-          <input 
-            type="email"
-            id="email"
-            placeholder="Email"
-            name="email"
-            className={styles.input}
-            value={email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </div>
-        {errores.email && <p className={styles.alert}>{errores.email}</p>}
-        <div>
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Como mínimo 6 caracteres"
-            name="password"
-            className={styles.input}
-            value={password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </div>
-        {errores.password && <p className={styles.alert}>{errores.password}</p>}
-        <div>
-          <label htmlFor="passwordRepetida">
-            Vuelve a escribir la contraseña
-          </label>
-          <input 
-            type="password"
-            id="passwordRepetida"
-            placeholder="Repetir la contraseña"
-            name="passwordRepetida"
-            className={styles.input}
-            value={passwordRepetida}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </div>
-        {errores.passwordRepetida && <p className={styles.alert}>{errores.passwordRepetida}</p>}
-        {error && <p>{error} </p>}
+    <>
+      <div className={styles.logo1}>
+      <Link href="/"><img className={styles.logo2} src={logo2.src} alt="" /></Link>
+      </div>
+      <div className={styles.container}>
+        <h1>Crear Cuenta</h1>
+        <form onSubmit={handleSubmit} noValidate>
+          <div>
+            <label htmlFor="nombre" style={{ fontWeight: "bold" }}>
+              Tu Usuario
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Usuario..."
+              name="nombre"
+              className={styles.input}
+              value={nombre}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+          {errores.nombre && <p className={styles.alert}>{errores.nombre}</p>}
+          <div>
+            <label htmlFor="email" style={{ fontWeight: "bold" }}>
+              Correo electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              name="email"
+              className={styles.input}
+              value={email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+          {errores.email && <p className={styles.alert}>{errores.email}</p>}
+          <div>
+            <label htmlFor="password" style={{ fontWeight: "bold" }}>
+              Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Como mínimo 6 caracteres"
+              name="password"
+              className={styles.input}
+              value={password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+          {errores.password && (
+            <p className={styles.alert}>{errores.password}</p>
+          )}
+          <div>
+            <label htmlFor="passwordRepetida" style={{ fontWeight: "bold" }}>
+              Vuelve a escribir la contraseña
+            </label>
+            <input
+              type="password"
+              id="passwordRepetida"
+              placeholder="Repetir la contraseña"
+              name="passwordRepetida"
+              className={styles.input}
+              value={passwordRepetida}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+          {errores.passwordRepetida && (
+            <p className={styles.alert}>{errores.passwordRepetida}</p>
+          )}
+          {error && <p>{error} </p>}
 
-        <button className={styles.button} type="submit" >Crear Cuenta</button>
-      </form>
-      <div>
-        <p>
-          Al crear una cuenta, aceptas las Condiciones de Uso y el Aviso de
-          Privacidad de BookScape.
-        </p>
+          <button className={styles.button} type="submit">
+            Crear Cuenta
+          </button>
+        </form>
+        <div>
+          <p>
+            Al crear una cuenta, aceptas las Condiciones de Uso y el Aviso de
+            Privacidad de BookScape.
+          </p>
+        </div>
+        <div>
+          <p>
+            ¿Ya tienes una cuenta? <Link href="/login">Iniciar Sesión</Link>
+          </p>
+        </div>
       </div>
-      <div>
-        <p>¿Ya tienes una cuenta? <Link href="/login">Iniciar Sesión</Link></p>
-      </div>
-    </div>
+    </>
   );
 };
 
