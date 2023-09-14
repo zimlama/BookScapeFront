@@ -123,7 +123,7 @@ const TabLibros: FC<{}> = () => {
             >
               + Nuevo Libro
             </button>
-            <Link href="/">
+            <Link href="/admin/RecuperarLibro">
               <button className={styles.button} type="submit">
                 Recuperar Libros
               </button>

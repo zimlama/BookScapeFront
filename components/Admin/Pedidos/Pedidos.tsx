@@ -40,8 +40,8 @@ const TabPedidos: FC<{}> = () => {
             <td>$15.000</td>
             <td>08/24/2023</td>
             <td>Pendiente</td>
-            <td className={styles.selectores}><Link href="/"><img src={modify.src} alt="Modificar" /></Link></td>
-            <td className={styles.selectores}><Link href="/"><img src={del.src} alt="Eliminar" /></Link></td>
+            <td className={styles.selectores}><Link href="/admin"><img src={modify.src} alt="Modificar" /></Link></td>
+            <td className={styles.selectores}><Link href="/admin"><img src={del.src} alt="Eliminar" /></Link></td>
             </tr>
      
           </tbody>

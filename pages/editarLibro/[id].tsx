@@ -238,8 +238,11 @@ const EditarProducto = () => {
             </button>
           </form>
         </div>
-        <div>
-          Si tiene alguna duda puede contactar al Desarrollador BookScape
+        <div className={styles.container}  >
+        <br />
+        <Link href='/admin' className={styles.button3} >Regresar Menú</Link>
+        <br /><br />
+         Si tiene alguna duda puede contactar al Desarrollador BookScape
         </div>
       </div>
     </div>

@@ -332,6 +332,12 @@ const NuevoLibro = () => {
           </button>
         </form>
       </div>
+      <div className={styles.container}  >
+        <br />
+        <Link href='/admin' className={styles.button3} >Regresar Menú</Link>
+        <br /><br />
+         Si tiene alguna duda puede contactar al Desarrollador BookScape
+        </div>
       {errorNewBook ? <p>Hubo un error al cargar el libro</p> : null}
     </div>
   );

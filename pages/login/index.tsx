@@ -54,20 +54,22 @@ const Login = () => {
       );
 
       if (response.data.message === "Login succesfully!") {
+        if (response.data.email === "admin@bookscape.net") {
+          login(response.data.token, response.data);
+          router.push("/admin");
+        }
         // Llama a la función login del contexto para establecer el usuario y el token
         // Verificar si hay una URL guardada en localStorage
-        const redirectAfterLogin = localStorage.getItem("redirectAfterLogin");
-        if (redirectAfterLogin) {
-          // Redirigir al usuario a la URL guardada
-          login(response.data.token, response.data);
-          router.push(redirectAfterLogin);
-          localStorage.removeItem("redirectAfterLogin"); // Borra la URL guardada
-        } else {
+        // const redirectAfterLogin = localStorage.getItem("redirectAfterLogin");
+        // if (redirectAfterLogin) {
+        // //   // Redirigir al usuario a la URL guardada
+        //   router.push(redirectAfterLogin);
+        //   localStorage.removeItem("redirectAfterLogin"); // Borra la URL guardada
+        // } else {
           // Redirigir a una página predeterminada después del inicio de sesión
           login(response.data.token, response.data);
           router.push("/"); // Cambia esto por la URL que desees
         }
-      }
 
       if (response.data === "User not found") {
         guardarError("Usuario no encontrado");
@@ -84,7 +86,7 @@ const Login = () => {
     }
   }
   return (
-    <GoogleOAuthProvider clientId="39161133259-thdljl41hrlio8isv54vq45v6jp1ejsb.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="332589329954-m07o8o9o6j0g091mrn8famijis79ook0.apps.googleusercontent.com">
     <>
       <div className={styles.logo1}>
       <Link href="/"><img className={styles.logo2} src={logo2.src} alt="" /></Link>

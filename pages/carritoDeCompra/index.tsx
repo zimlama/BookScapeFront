@@ -9,6 +9,29 @@ import { useCartContext } from "@/context/CartContext";
 
 const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK;
 
+// Función para guardar selectedItems en el local storage
+// Función para guardar selectedItems en el local storage
+const saveSelectedItemsToLocalStorage = (data:any) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem("selectedItems1", JSON.stringify(data));
+  }
+};
+
+// Función para guardar selectedItems en el local storage
+const saveSelectedItemsToLocalStorage1 = (data:any) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem("selectedItems1", JSON.stringify(data));
+  }
+};
+
+
+// Función para cargar selectedItems desde el local storage
+const loadSelectedItemsFromLocalStorage = () => {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem("selectedItems1");
+    return data ? JSON.parse(data) : {};
+  }
+};
 const CarritoDeCompra = () => {
   const { user, isAuthenticated, rutaLogin } = useAuthContext();
   const { cartItems, actualizarCantidad, eliminarProducto } = useCartContext();
@@ -26,8 +49,16 @@ const CarritoDeCompra = () => {
   const [paymentAttempted, setPaymentAttempted] = useState(false);
   const [selectedItems2, setSelectedItems2] = useState<{
     [id: string]: boolean;
-  }>({});
+  }>(() => {
+    // Cargar selectedItems desde el local storage al inicializar el componente
+    const storedSelectedItems = loadSelectedItemsFromLocalStorage();
+    return storedSelectedItems;
+  });
 
+  useEffect(() => {
+    localStorage.setItem("totalBd", totalBd.toFixed(2));
+  }, [totalBd]);
+  
   const handlePaymentButtonClick = () => {
     // Verifica si hay libros seleccionados
     if (isAuthenticated()) {
@@ -85,18 +116,26 @@ const CarritoDeCompra = () => {
   }, [cartItems, selectedItems2]);
 
   const toggleSelectItem = (itemId: number) => {
-    setSelectedItems((prevSelected) => ({
-      ...prevSelected,
+    setSelectedItems((prevSelected) => {
+      const updatedSelectedItems = {...prevSelected,
       [itemId]: !prevSelected[itemId],
-    }));
   };
+    // Guardar los cambios en el local storage
+    saveSelectedItemsToLocalStorage1(updatedSelectedItems);
+
+    return updatedSelectedItems;
+  })};
 
   const toggleSelectItem2 = (itemId: number) => {
-    setSelectedItems2((prevSelected) => ({
-      ...prevSelected,
+    setSelectedItems2((prevSelected) => {
+      const updatedSelectedItems2 = {...prevSelected,
       [itemId]: !prevSelected[itemId],
-    }));
   };
+    // Guardar los cambios en el local storage
+    saveSelectedItemsToLocalStorage(updatedSelectedItems2);
+
+    return updatedSelectedItems2;
+  })};
 
   return (
     <>
@@ -282,7 +321,7 @@ const CarritoDeCompra = () => {
                       <button
                         className={styles.button}
                         type="button"
-                        onClick={() => rutaLogin("/")}
+                        onClick={() => rutaLogin("/checkout")}
                       >
                         Proceder al Pago
                       </button>

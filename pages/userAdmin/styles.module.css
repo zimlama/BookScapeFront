@@ -1,23 +1,59 @@
-.contenedor{
+.contenedor {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
 
+  }
+
+  
+  .logo img {
+    width: 180px;
+    cursor: pointer;
+    margin-top: 0px;
+    margin: 10px;
+  }
+
+  .menu{
+    background-color: rgba(255, 255, 255, 0.806);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border-collapse: separate; 
+    border-spacing: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 1px 1px 2px rgb(204 204 204 / 75%);  
+
+  }
+
+  .liner {
     background: linear-gradient(180deg, #eeeeee 26.71%, #b1b1b1 50%);
     width: 100%;
-}
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 8px;
+    box-shadow: 1px 1px 2px rgb(204 204 204 / 75%);  
+    border: 1px solid #a2a1a1;
 
-.logo img{
-    width: 250px;
-    margin: auto;
-    padding: 20px;
+  }
 
-}
-
-.links{
-    text-decoration: none;
-    color: rgb(62, 62, 62);
-}
-
-.der{
-    background-color: rgba(255, 255, 255, 0.713);
-    width:76%;
-}
+  .h3 {
+    margin-top: 0;
+  }
+  .icono {
+    max-width: 1.5rem;
+    max-height: 1rem;
+    margin-right: 15px;
+  }
+  

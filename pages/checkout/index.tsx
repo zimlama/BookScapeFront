@@ -6,15 +6,32 @@ import { useCartBdContext } from "@/context/CartBdContext";
 import styles from "./checkout.module.css";
 import pago from "../../public/images/pay.png";
 
+const saveToLocalStorage = (key:any, data:any) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+const loadFromLocalStorage = (key:any) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+};
+
 const CheckoutPage: React.FC = () => {
   const { user, isAuthenticated } = useAuthContext();
-  const { cartItemsBd, totalBd, selectedItems, setSelectedItems } =
+  const { cartItemsBd, totalBd, selectedItems, setSelectedItems, setTotalBd } =
     useCartBdContext();
 
   // Estado para la información del usuario
   const [userInfo, setUserInfo] = useState({
-    email: user?.email || "",
+    email: user?.email,
   });
+
+  useEffect(() => {
+    const savedTotalBd = localStorage.getItem("totalBd");
+    if (savedTotalBd) {
+      setTotalBd(parseFloat(savedTotalBd));
+    }
+  }, []);
+  
 
   // Estados para la edición del correo electrónico
   const [editEmail, setEditEmail] = useState(false);
@@ -23,27 +40,30 @@ const CheckoutPage: React.FC = () => {
   const [confirmed, setConfirmed] = useState(false);
   const [invoiceNumber, setInvoiceNumber] = useState(""); // Debes implementar la lógica para generar números de factura
 
+  // Cargar la información del usuario desde el localStorage al montar el componente
   useEffect(() => {
-    // Implementa la lógica para generar el número de factura de forma consecutiva
-    // Por ejemplo, consulta la última factura en tu base de datos y suma 1
-    // setInvoiceNumber(...);
-  }, []);
+    const savedUserInfo = loadFromLocalStorage("userInfo");
+    if (savedUserInfo && savedUserInfo.email) {
+      setUserInfo(savedUserInfo);
+    }
+  }, []); 
+
+  // Guardar la información del usuario en el localStorage cuando se actualiza
+  useEffect(() => {
+    saveToLocalStorage("userInfo", userInfo);
+  }, [userInfo]);
 
   const handleConfirmOrder = async () => {
     // Implementa la lógica para registrar la orden en tu base de datos
-    // Esto puede incluir el envío de datos a tu servidor y la interacción con PayPal
-
-    // Después de registrar la orden con éxito, marca como confirmada
     setConfirmed(true);
   };
 
   const handleEmailEditSave = () => {
     // Implementa la lógica para guardar el correo editado, en la base de datos o donde sea necesario
     // Luego, cambia el estado editEmail a false para mostrar el correo como texto nuevamente
-
     setEditEmail(false);
   };
-
+  
   return (
     <div className={styles.titulo}>
       <h1>Finalizar Compra</h1>
@@ -57,7 +77,6 @@ const CheckoutPage: React.FC = () => {
               </div>
               {editEmail ? (
                 // Si se está editando el correo, muestra un input para la edición
-
                 <div>
                   <input
                     type="email"
@@ -75,7 +94,7 @@ const CheckoutPage: React.FC = () => {
               ) : (
                 // Si no se está editando, muestra el correo como texto
                 <p>
-                  Correo Electrónico: {userInfo.email}{" "}
+                  Correo Electrónico: {userInfo.email}
                   <button onClick={() => setEditEmail(true)}>Editar</button>
                 </p>
               )}
@@ -162,6 +181,7 @@ const CheckoutPage: React.FC = () => {
               </div>{" "}
             </section>
           </div>
+
           {/* Mostrar el botón de PayPal después de la confirmación */}
           {confirmed ? (
             <PaypalButton

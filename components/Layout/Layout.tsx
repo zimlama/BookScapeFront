@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
   
   // Lista de rutas donde NO se mostrará el Navbar y el Footer
-  const routesToHideNavbarAndFooter = ['/login', '/crearCuenta', '/admin', '/userAdmin', '/editarLibro/[id]', '/nuevoLibro'];
+  const routesToHideNavbarAndFooter = ['/login', '/crearCuenta', '/admin', '/userAdmin', '/editarLibro/[id]', '/nuevoLibro', '/admin/RecuperarLibro','/editarUsuario/[id]', '/admin/RecuperarUsuario', '/resenaLibro/[id]'];
   const shouldShowNavbarAndFooter = !routesToHideNavbarAndFooter.includes(router.pathname);
 
   return (

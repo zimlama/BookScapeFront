@@ -10,11 +10,6 @@ import React, {
 import { useAuthContext } from "@/context/AuthContext";
 const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK;
 
-type Author = {
-  name: string;
-  // Agrega otras propiedades si es necesario
-};
-
 interface CartItem {
   id_book: number;
   title: string;
@@ -32,8 +27,9 @@ interface CartContextType {
   setTotalBd: React.Dispatch<React.SetStateAction<number>>;
   totalBd: number;
   selectedItems: { [id: string]: boolean }; // Tipo para selectedItems
-  setSelectedItems: React.Dispatch<React.SetStateAction<{ [id: string]: boolean }>>;
-  
+  setSelectedItems: React.Dispatch<
+    React.SetStateAction<{ [id: string]: boolean }>
+  >;
 }
 
 const CartBdContext = createContext<CartContextType | undefined>(undefined);
@@ -49,13 +45,25 @@ export const useCartBdContext = (): CartContextType => {
 export const CartBdProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  // Función para cargar selectedItems desde el local storage
+const loadSelectedItemsFromLocalStorage1 = () => {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem("selectedItems1");
+    return data ? JSON.parse(data) : {};
+  }
+};
+
   const { user, isAuthenticated, rutaLogin } = useAuthContext();
   const initialState: CartItem[] = [];
   const [cartItemsBd, setCartItemsBd] = useState<CartItem[]>(initialState);
-  const [totalBd, setTotalBd] = useState(0); 
-  const [selectedItems, setSelectedItems] = useState<{ [id: string]: boolean }>(
-    {}
-  );
+  const [totalBd, setTotalBd] = useState(0);
+  const [selectedItems, setSelectedItems] = useState<{
+    [id: string]: boolean;
+  }>(() => {
+    // Cargar selectedItems desde el local storage al inicializar el componente
+    const storedSelectedItems = loadSelectedItemsFromLocalStorage1();
+    return storedSelectedItems;
+  });
 
   useEffect(() => {
     if (isAuthenticated() && user) {
@@ -69,14 +77,15 @@ export const CartBdProvider: React.FC<{ children: ReactNode }> = ({
           const cantidadLS = JSON.parse(
             localStorage.getItem("cantidad") || "null"
           );
-          
+
           const cartItemsCantidad = response.data.Books.map(
             (book: CartItem) => ({
               ...book,
-              cantidad: book.id_book === cantidadLS.id_book ? cantidadLS.cantidad : 1,
+              cantidad:
+                book.id_book === cantidadLS.id_book ? cantidadLS.cantidad : 1,
             })
           );
-          
+
           setCartItemsBd(cartItemsCantidad);
         } catch (error) {
           console.error(
@@ -122,26 +131,30 @@ export const CartBdProvider: React.FC<{ children: ReactNode }> = ({
   const eliminarProductoBd = async (id: number): Promise<void> => {
     try {
       if (user) {
-        const response = await axios.delete(`${bookscapeback}/shoppingcart/remove`, {
-          data: {
-            id_cart: user.shoppingcartId.cart_id,
-            id_book: id,
-          },
-        });
-        
+        const response = await axios.delete(
+          `${bookscapeback}/shoppingcart/remove`,
+          {
+            data: {
+              id_cart: user.shoppingcartId.cart_id,
+              id_book: id,
+            },
+          }
+        );
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error);
       // Puedes agregar aquí código para mostrar un mensaje de error al usuario
     }
-    const carritoActualizado = cartItemsBd.filter((cart) => cart.id_book !== id);
+    const carritoActualizado = cartItemsBd.filter(
+      (cart) => cart.id_book !== id
+    );
     setCartItemsBd(carritoActualizado);
   };
 
   const actualizarCantidadBd = (cart: CartItem): void => {
     const carritoActualizado = cartItemsBd.map((cartState) => {
       if (cartState.id_book === cart.id_book) {
-        (cartState.cantidad = cart.cantidad);
+        cartState.cantidad = cart.cantidad;
       }
       return cartState;
     });

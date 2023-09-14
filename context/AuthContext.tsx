@@ -1,14 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 type User = {
-  message: string;
-  id: string;
+  message: string | undefined;
+  id: string | undefined;
   email: string;
   username: string;
-  token: string;
+  admin: boolean | undefined;
+  token: string | undefined;
   shoppingcartId: {
-    cart_id: number; // Cambia 'number' si el tipo real es diferente
-  };
+      cart_id: number;
+  } | undefined;
 };
 
 interface AuthContextType {
@@ -78,7 +79,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const isAuthenticated = () => {
-    return user?.token !== null;
+    return token !== null;
   };
 
   // Creación del objeto "contextValue" con la información del contexto

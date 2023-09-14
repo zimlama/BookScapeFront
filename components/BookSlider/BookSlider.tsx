@@ -3,8 +3,8 @@ import { useBookContext } from "@/context/BookContext";
 import styles from "./BookSlider.module.css";
 import Rating from "../Rating/Rating";
 import { useAuthContext } from "@/context/AuthContext";
-import promo from "../../public/images/promo.png"
-import Link from 'next/link';
+import promo from "../../public/images/promo.png";
+import Link from "next/link";
 
 const BooksSlider: React.FC = () => {
   const { user, isAuthenticated, rutaLogin } = useAuthContext();
@@ -49,7 +49,7 @@ const BooksSlider: React.FC = () => {
 
   return (
     <div className={styles.topratedbooksslider}>
-       <div className={styles.slider} >
+      <div className={styles.slider}>
         {topRatedBooks
           .slice(currentIndex, currentIndex + 5)
           .map((book, index) => (
@@ -57,32 +57,44 @@ const BooksSlider: React.FC = () => {
               key={book.id_book}
               className={`${styles.slideritem} ${
                 index === 0 ? styles.active : ""
-              }`}           
+              }`}
             >
-              <div className={styles.contenedor} > 
-                  <div className={styles.izq} >
-                      <img src={book.image} alt={book.title} className={styles.image}  />
-                  </div>
-                  <div className={styles.der} >   
-                      <h3>{book.title}</h3>
-                      <Rating rating_ave={book.rating_ave} />
-                      {book.Authors.map((obj:any, index:any) => (
-                       <div key={index}>{obj.name}</div>
-                          ))}
-                      <p>Calificación Promedio: {book.rating_ave}</p>
-                 <div>            
-              {isAuthenticated() && user ? (
-              <></>
-            ) : <Link href={"/login"}>
-            <button className={styles.button} type="button" onClick={() => rutaLogin("http://mpago.li/2NZfEab")}>
-              Comprar
-            </button>
-            <br />
-          </Link>}</div>
-                  </div>
-                  <div className={styles.promo}><img src={promo.src} alt="Promocion"/></div>
+              <div className={styles.contenedor}>
+                <div className={styles.izq}>
+                  <img
+                    src={book.image}
+                    alt={book.title}
+                    className={styles.image}
+                  />
                 </div>
-             
+                <div className={styles.der}>
+                  <h3>{book.title}</h3>
+                  <Rating rating_ave={book.rating_ave} />
+                  {book.Authors.map((obj: any, index: any) => (
+                    <div key={index}>{obj.name}</div>
+                  ))}
+                  <p>Calificación Promedio: {book.rating_ave}</p>
+                  <div>
+                    {isAuthenticated() && user ? (
+                      <></>
+                    ) : (
+                      <Link href={"/login"}>
+                        <button
+                          className={styles.button}
+                          type="button"
+                          onClick={() => rutaLogin("http://mpago.li/2NZfEab")}
+                        >
+                          Comprar
+                        </button>
+                        <br />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.promo}>
+                  <img src={promo.src} alt="Promocion" />
+                </div>
+              </div>
             </div>
           ))}
       </div>
@@ -92,17 +104,16 @@ const BooksSlider: React.FC = () => {
           onClick={goToPreviousBook}
           disabled={currentIndex === 0}
         >
-          &lt; 
+          &lt;
         </button>
         <button
           className={styles.sliderButton}
           onClick={goToNextBook}
           disabled={currentIndex === topRatedBooks.length - 1}
         >
-           &gt;
+          &gt;
         </button>
       </div>
-      
     </div>
   );
 };

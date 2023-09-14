@@ -5,9 +5,7 @@
 }
 
 .slider {
-  display: flex;  
-  flex-direction: raw;
-  justify-content: space-around;
+
   height: 80%;
   border-radius: 8px;
   transition: transform 1.5s ease-in-out;
@@ -18,8 +16,9 @@
   transition: transform 1.5s ease-in-out;
   opacity: 0;
   display: none;
-  width: 100%;
+  width:96%;
   padding: 20px;
+  margin-top: 10px;
 
 }
 
@@ -29,7 +28,7 @@
 }
 
 .topratedbooksslider h2 {
-  font-size: 2.5rem;
+  font-size: 9.5rem;
   margin-bottom: 10px;
 }
 
@@ -84,6 +83,8 @@
 
 .contenedor{
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   max-height: 300px;
   width: 99%;
   border-radius: 8px;
@@ -106,7 +107,8 @@
 }
 
 .der{
-  width:75%;
+  width:55%;
+  margin-left: 50px;
   text-align: left;
 
 }

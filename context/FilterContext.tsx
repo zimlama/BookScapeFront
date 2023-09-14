@@ -177,14 +177,6 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
     }
   };
 
-  console.log("esot es: ", {
-    tags: filters.selectedTags.join(","),
-    language: filters.language,
-    price: filters.price,
-    authors:filters.selectedAuthors.join(","),
-    rating_ave: filters.rating_ave,
-  });
-
   const contextValue: FilterContextType = {
     uniqueLanguages,
     uniqueTags,

@@ -13,6 +13,7 @@ type UserLogin = {
   email: string;
   username: string;
   token: string;
+  admin: boolean;
   shoppingcartId: {
     cart_id: number;
   };
@@ -51,6 +52,7 @@ export default function LoginGoogle() {
             email: response.data.email,
             username: response.data.username,
             token: response.data.token,
+            admin: response.data.admin,
             shoppingcartId: {
               cart_id: response.data.cartId,
             },
