@@ -21,6 +21,16 @@
   width: 80%;
   gap: 0.1rem;
 }
+.descriptionDer img{
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  color: rgb(0, 0, 0);
+  
+ background-color: black;
+
+  
+}
 
 .autor img{
   margin-top: 20px;

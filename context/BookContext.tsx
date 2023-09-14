@@ -3,9 +3,10 @@ import axios from "axios";
 
 
 const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK; // Obtiene la URL base del archivo .env.local
-const booksUrl = `${bookscapeback}/books/`; // Construye la URL completa
 
-
+type Language = {
+  language: string;
+}
 // Definición del tipo de objeto "Book"
 type Author = {
   name: string;
@@ -19,6 +20,7 @@ type Tags = {
 
 type Book = {
   id_book: number;
+  isbn:number;
   title: string;
   Authors: Author[];
   published_date: number;
@@ -28,7 +30,7 @@ type Book = {
   image: string;
   page_count: number;
   Tags: Tags[];
-  Language: string;
+  Language: Language;
 };
 
 // Definición del tipo de objeto para el contexto "BookContextType"
@@ -64,7 +66,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get(booksUrl);
+      const response = await axios.get(`${bookscapeback}/books/`);
       const booksWithRandomRating = response.data.map((book: Book) => ({
         ...book,
         rating_ave:
@@ -72,6 +74,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
           page_count:
           book.page_count !== null ? book.page_count : (Math.random() * 200).toFixed(0),
       }));
+      
       setBooks(booksWithRandomRating);
     } catch (error) {
       console.error("Error fetching books:", error);

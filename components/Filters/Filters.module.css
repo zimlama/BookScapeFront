@@ -6,6 +6,7 @@
 
 }
 
+
 .tags2{
   font-size: 26px;
 }
@@ -30,6 +31,11 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  .buttonContainer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
   
   .button {
     background-color: #c50d0d;
@@ -40,7 +46,8 @@
     cursor: pointer;
     text-align: center;
     justify-content: center;
-    margin-left: 2.5rem;
+    margin-top: 1rem;
+ 
   }
   
   .button:hover {

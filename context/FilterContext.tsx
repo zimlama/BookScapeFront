@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK; // Obtiene la URL base del archivo .env.local
-const booksUrl = `${process.env.NEXT_PUBLIC_BOOKSCAPEBACK}/books/`; // Construye la URL completa
+const booksUrl = `${bookscapeback}/books/`; // Construye la URL completa
 const languageUrl = `${bookscapeback}/books/language`; // Construye la URL completa
 const tagsUrl = `${bookscapeback}/books/tags`; // Construye la URL completa
 const authorsUrl = `${bookscapeback}/books/authors`; // Construye la URL completa
@@ -42,7 +42,7 @@ type Book = {
   image: string;
   page_count: number;
   Tags: Tags[];
-  Language: string;
+  Language: Language;
 };
 
 
@@ -54,6 +54,11 @@ type FilterContextType = {
   setFilters: React.Dispatch<React.SetStateAction<FilterState>>;
   applyFilters: () => Promise<void>;
   booksFilters: Book[];
+  setBooksFilters: React.Dispatch<React.SetStateAction<Book[]>>;
+  aplyFilters: boolean;
+  setAplyFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  busqueda: string;
+  guardarBusqueda:React.Dispatch<React.SetStateAction<string>>;
 };
 
 type FilterProviderProps = {
@@ -74,6 +79,8 @@ export const useFilterContext = () => {
 export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
 
   const [booksFilters, setBooksFilters] = useState<Book[]>([]);
+  const [aplyFilters, setAplyFilters] = useState(false);
+  const [busqueda, guardarBusqueda] = useState<string>("");
 
   useEffect(() => {
     fetchBooks();
@@ -113,7 +120,6 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
     fetchAuthors(); 
   }, []);
 
-
   const fetchLanguages = async () => {
     try {
       const response = await axios.get(languageUrl);
@@ -144,9 +150,6 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
     }
   };
 
-  
-  // const [filteredBooks, setFilteredBooks] = useState(books);
-
   const applyFilters = async () => {
     try {
       const response = await axios.get(filterUrl, {
@@ -158,6 +161,7 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
           rating_ave: filters.rating_ave,
         },
       });
+
       const booksWithRandomRating = response.data.map((book: Book) => ({
         ...book,
         rating_ave:
@@ -165,11 +169,21 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
           page_count:
           book.page_count !== null ? book.page_count : (Math.random() * 200).toFixed(0),
       }));
+      
       setBooksFilters(booksWithRandomRating);
+      setAplyFilters(true);
     } catch (error) {
       console.error("Error applying filters:", error);
     }
   };
+
+  console.log("esot es: ", {
+    tags: filters.selectedTags.join(","),
+    language: filters.language,
+    price: filters.price,
+    authors:filters.selectedAuthors.join(","),
+    rating_ave: filters.rating_ave,
+  });
 
   const contextValue: FilterContextType = {
     uniqueLanguages,
@@ -179,6 +193,11 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
     setFilters,
     applyFilters,
     booksFilters,
+    setBooksFilters,
+    aplyFilters,
+    setAplyFilters,
+    busqueda,
+    guardarBusqueda,
   };
 
   return (

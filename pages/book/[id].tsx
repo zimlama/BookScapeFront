@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useCartContext } from "@/context/CartContext";
 import { useCartBdContext } from "@/context/CartBdContext";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFilterContext } from "@/context/FilterContext";
+import Swal from "sweetalert2";
 
 const DetallesBook = () => {
   const { user, isAuthenticated } = useAuthContext();
@@ -20,6 +22,8 @@ const DetallesBook = () => {
 
   const { agregarCarrito } = useCartContext();
   const { agregarCarritoBd } = useCartBdContext();
+
+  const { aplyFilters, busqueda } = useFilterContext();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -74,6 +78,13 @@ const DetallesBook = () => {
         localStorage.setItem("cantidad", JSON.stringify(storedCantidadDb));
       }
     }
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'El libro se agrego al carrito',
+      showConfirmButton: false,
+      timer: 1800
+    })
   };
 
   return (
@@ -81,7 +92,24 @@ const DetallesBook = () => {
       {detallebook ? (
         <div className={styles.container}>
           <div className={styles.izquierda}>
-            <Link href={"/"}>Regresar</Link>
+            {aplyFilters ? (
+              busqueda ? (
+                <Link href={`/buscar?q=${busqueda}`}>
+                  {" "}
+                  <button className={styles.button}>Regresar</button>
+                </Link>
+              ) : (
+                <Link href={"/filtrar"}>
+                  <button className={styles.button}>Regresar</button>
+                </Link>
+              )
+            ) : (
+              <Link href={`/buscar?q=${busqueda}`}>
+                {" "}
+                <button className={styles.button}>Regresar</button>
+              </Link>
+            )}
+
             <div className={styles.imagen}>
               <img src={detallebook.image} alt={detallebook.title} />
               <Rating rating_ave={detallebook.rating_ave} />
@@ -110,20 +138,6 @@ const DetallesBook = () => {
               <div className={styles.formulario}>
                 <form onSubmit={handleSubmit}>
                   <div>
-                    {" "}
-                    <label htmlFor="cantidad">Cantidad:</label>
-                    <select
-                      id="cantidad"
-                      onChange={(e) => setCantidad(+e.target.value)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                  </div>
-                  <div>
                     <input
                       type="submit"
                       value="Agregar al carrito "
@@ -131,9 +145,23 @@ const DetallesBook = () => {
                     />
                   </div>
                   <div>
-                    <Link href={`/`}>
-                      <button className={styles.button}>Regresar</button>
-                    </Link>
+                    {aplyFilters ? (
+                      busqueda ? (
+                        <Link href={`/buscar?q=${busqueda}`}>
+                          {" "}
+                          <button className={styles.button}>Regresar</button>
+                        </Link>
+                      ) : (
+                        <Link href={"/filtrar"}>
+                          <button className={styles.button}>Regresar</button>
+                        </Link>
+                      )
+                    ) : (
+                      <Link href={`/buscar?q=${busqueda}`}>
+                        {" "}
+                        <button className={styles.button}>Regresar</button>
+                      </Link>
+                    )}
                   </div>
                 </form>
               </div>

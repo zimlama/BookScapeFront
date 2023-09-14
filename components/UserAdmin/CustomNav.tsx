@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import styles from "./CustomNav.module.css";
 
-const CustomNav = ({ li }) => {
-  const [window, setWindow] = useState(false);
+interface CustomNavProps {
+  li: [React.ReactNode, string][];
+}
 
-  let openClose = () => {
-    if (window === false) {
-      setWindow(true);
-    } else {
-      setWindow(false);
-    }
+const CustomNav: React.FC<CustomNavProps> = ({ li }) => {
+  const [windowOpen, setWindowOpen] = useState(false);
+
+  const toggleWindow = () => {
+    setWindowOpen(!windowOpen);
   };
+
   return (
-    <nav className={styles.navbarMenu} style={{ width: window === false ? 250 : 60 }}>
-      <div className="burger" onClick={() => openClose()}>
+    <nav className={styles.navbarMenu} style={{ width: windowOpen ? 250 : 60 }}>
+      <div className="burger" onClick={toggleWindow}>
         <img src="images/menu.svg" alt="burger" />
       </div>
       <ul className={styles.navbar__list}>
@@ -22,11 +23,11 @@ const CustomNav = ({ li }) => {
             <img
               src={item[1]}
               alt={item[1]}
-              style={{ paddingLeft: window === false ? 27 : 17 }}
+              style={{ paddingLeft: windowOpen ? 27 : 17 }}
             />
             <li
               className={styles.navbarli}
-              style={{ display: window === false ? "inline-block" : "none" }}
+              style={{ display: windowOpen ? "inline-block" : "none" }}
             >
               {item[0]}
             </li>

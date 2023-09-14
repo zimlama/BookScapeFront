@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useBookContext } from "@/context/BookContext";
+import { useFilterContext } from "@/context/FilterContext";
 import CardsBooks from "@/components/CardsBooks/CardsBooks";
 import styles from "../../styles/Home.module.css";
 import autor from "../../public/images/autor.png";
 import Pagination from "@/components/Pagination/Pagination";
 import Filtros from "@/components/Filters/Filters";
+import { useBookContext } from "@/context/BookContext";
+
+type Language = {
+  language: string;
+};
 
 type Author = {
   name: string;
@@ -28,7 +33,7 @@ type Book = {
   image: string;
   page_count: number;
   Tags: Tags[];
-  Language: string;
+  Language: Language;
 };
 
 const normalizeString = (str: string) => {
@@ -44,6 +49,7 @@ const Buscar: React.FC = () => {
   const q = typeof query.q === "string" ? normalizeString(query.q) : "";
 
   // Todos los libros
+  const { booksFilters, setBooksFilters, aplyFilters } = useFilterContext();
   const { books } = useBookContext();
   const itemsPerPage = 10; // Cambia esto al número de elementos por página
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,18 +61,34 @@ const Buscar: React.FC = () => {
   const [resultado, guardarResultado] = useState<Book[]>([]);
 
   useEffect(() => {
-    const filteredBooks = books.filter((book: Book) => {
-      const normalizedTitle = normalizeString(book.title);
-      const authorsMatch = book.Authors.some((author) =>
-        normalizeString(author.name).includes(q)
-      );
-      const tagsMatch = book.Tags.some((tag) =>
-        normalizeString(tag.name).includes(q)
-      );
-      return normalizedTitle.includes(q) || authorsMatch || tagsMatch;
-    });
-    guardarResultado(filteredBooks);
-  }, [q, books]);
+
+    if(aplyFilters){
+      const filteredBooks = booksFilters.filter((book) => {
+        const normalizedTitle = normalizeString(book.title);
+        const authorsMatch = book.Authors.some((author) =>
+          normalizeString(author.name).includes(q)
+        );
+        const tagsMatch = book.Tags.some((tag) =>
+          normalizeString(tag.name).includes(q)
+        );
+        return normalizedTitle.includes(q) || authorsMatch || tagsMatch;
+      });
+      guardarResultado(filteredBooks);
+      
+    } else {
+      const filteredBooks = books.filter((book) => {
+        const normalizedTitle = normalizeString(book.title);
+        const authorsMatch = book.Authors.some((author) =>
+          normalizeString(author.name).includes(q)
+        );
+        const tagsMatch = book.Tags.some((tag) =>
+          normalizeString(tag.name).includes(q)
+        );
+        return normalizedTitle.includes(q) || authorsMatch || tagsMatch;
+      });
+      guardarResultado(filteredBooks);
+    }
+  }, [q]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -76,7 +98,7 @@ const Buscar: React.FC = () => {
     <div className={styles.description}>
       <div className={styles.descriptionIzq}>
         <h3>Consulta por categorias</h3>
-        <Filtros/>
+        <Filtros />
       </div>
       <div className={styles.descriptionDer}>
         <div>

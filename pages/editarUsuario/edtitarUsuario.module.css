@@ -1,0 +1,7 @@
+.error {
+    color: red; /* Color del texto en rojo */
+    font-size: 14px; /* Tamaño de fuente */
+    margin-top: 5px; /* Espacio superior para separar el error del campo de entrada */
+    text-align: center;
+    align-items: center;
+  }

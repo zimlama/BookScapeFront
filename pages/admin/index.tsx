@@ -65,6 +65,7 @@ const tabs: TabsType = [
 export default function Admin() {
     const [selectedTab, setSelectedTab] = useState<number>(tabs[0].index);
   
+
     return (
       <div className={styles.contenedor}>
         <div className={styles.liner}>
@@ -76,7 +77,8 @@ export default function Admin() {
         </div>
         <div><h3>Panel de Administrador</h3>
         </div>
-        <div className={styles.menu} ><Tabs selectedTab={selectedTab} onClick={setSelectedTab} tabs={tabs}/></div>
+        <div className={styles.menu} >
+          <Tabs selectedTab={selectedTab} onClick={setSelectedTab} tabs={tabs}/></div>
         <div>Si tiene alguna duda puede contactar al Desarrollador BookScape</div>
         
         

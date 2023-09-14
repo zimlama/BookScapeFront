@@ -13,12 +13,10 @@ const TabPagos: FC<{}> = () => {
       <div className={styles.contenedor}>
       <div className={styles.titulo}>
         <h2><img src={money.src} alt="Logo" />Pagos recibidos</h2>  
-        <span><input type="search" name="" id=""  className={styles.buscador}/>
-        <img src={buscar.src} alt="buscador" /></span>
       </div>
       <div className={styles.subTitulo}><p>Busca y modifica Pagos recibidos </p>
       <div>
-      <Link href="/"><button className={styles.button} type="submit">Exportar Pagos</button></Link>
+      <Link href="/"><button className={styles.button} type="submit">Consultar Pagos</button></Link>
       </div>
       </div>
       <div className={styles.resultados}>
@@ -49,16 +47,6 @@ const TabPagos: FC<{}> = () => {
             <td className={styles.selectores}><Link href="/"><img src={modify.src} alt="Modificar" /></Link></td>
             <td className={styles.selectores}><Link href="/"><img src={del.src} alt="Eliminar" /></Link></td>
             </tr>
-            <td><input type="checkbox" name="" id="" /></td>
-            <td>02</td>
-            <td>02</td>
-            <td>Roberto Salmona</td>
-            <td>$5.07</td>
-            <td>24/08/2023</td>
-            <td>Recahzada</td>
-            <td className={styles.selectores}><Link href="/"><img src={modify.src} alt="Modificar" /></Link></td>
-            <td className={styles.selectores}><Link href="/"><img src={del.src} alt="Eliminar" /></Link></td>
-           
           </tbody>
         </table>
 

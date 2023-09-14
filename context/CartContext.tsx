@@ -9,6 +9,8 @@ import React, {
 
 import { useAuthContext } from "@/context/AuthContext";
 
+const bookscapeback = process.env.NEXT_PUBLIC_BOOKSCAPEBACK; // Obtiene la URL base del archivo .env.local
+
 interface CartItem {
   id_book: number;
   title: string;
@@ -41,7 +43,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   const { user, isAuthenticated, rutaLogin } = useAuthContext();
   const initialState: CartItem[] = [];
   const [cartItems, setCartItems] = useState<CartItem[]>(initialState);
-  console.log(user);
+  
 
   useEffect(() => {
     if (!user) {
@@ -67,7 +69,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/shoppingcart/books/${user.shoppingcartId.cart_id}`
+            `${bookscapeback}/shoppingcart/books/${user.shoppingcartId.cart_id}`
           );
 
           // Agregar la propiedad "cantidad" a cada elemento en el array
@@ -83,9 +85,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [user]);
 
-  console.log(cartItems);
   
-
   const agregarCarrito = (cart: CartItem): void => {
     if (cartItems.some((cartState) => cartState.id_book === cart.id_book)) {
       const carritoActualizado = cartItems.map((cartState) => {
@@ -126,6 +126,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     agregarCarrito,
     eliminarProducto,
     actualizarCantidad,
+    
   };
 
   return (

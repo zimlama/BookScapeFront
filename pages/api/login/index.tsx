@@ -1,4 +1,4 @@
-import { useUsuarioContext } from "@/context//UsuarioContext";
+import { useUsuarioContext } from "@/context/UsuarioCrudContext";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getUsers } from "../../../db/user";

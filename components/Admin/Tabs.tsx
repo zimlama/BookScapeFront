@@ -9,12 +9,12 @@ type TabsProps = {
   }[];
   selectedTab: number;
   onClick: (index: number) => void;
-  orientation?: "vertical" | "vertical";
+  orientation?: "vertical" | "horizontal";
   className?: string;
 };
 
 /**
- * Avalible Props
+ * Available Props
  * @param className string
  * @param tab Array of object
  * @param selectedTab number
@@ -26,9 +26,9 @@ const Tabs: FC<TabsProps> = ({
   tabs = [],
   selectedTab = 0,
   onClick,
-  orientation = "vertical"
+  orientation = "horizontal"
 }) => {
-  const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
+  const activeTab = tabs.find((tab) => tab.index === selectedTab);
 
   return (
     <div
@@ -58,9 +58,10 @@ const Tabs: FC<TabsProps> = ({
         aria-labelledby={`btn-${selectedTab}`}
         id={`tabpanel-${selectedTab}`}
       >
-        {Panel && <Panel.Component index={selectedTab} />}
+        {activeTab && <activeTab.Component index={selectedTab} />}
       </div>
     </div>
   );
 };
+
 export default Tabs;

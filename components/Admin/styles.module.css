@@ -54,7 +54,9 @@
   .tabla thead tr{ 
     background-color: #e80202; 
     color: #ffffff;
-    text-align: middle; }
+    text-align: middle; 
+    
+  }
   .table th, .table td { 
     padding: 12px 15px; }
   .table tbody tr{ 
@@ -66,7 +68,7 @@
     width: 100%px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     background-color: white;
   
     
@@ -104,3 +106,15 @@ img{
     width: 2rem;
 
  }
+
+ .deletebutton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px; /* Ajusta el margen según tu diseño */
+}
+
+.deletebutton img {
+  width: 17px; /* Ajusta el tamaño según tu diseño */
+  height: 17px;
+}

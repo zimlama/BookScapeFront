@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CustomNav from "../../components/UserDash/CustomNav";
+import CustomNav from "../../components/UserAdmin/CustomNav";
 import styles from "./styles.module.css";
 import logo from "../../public/images/BookScapeLogo.png";
 import Link from "next/link";

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./crearcuenta.module.css";
-import { useUsuarioContext } from "@/context/UsuarioContext";
 import useValidacion from "../../hooks/useValidacion";
 import validarCrearCuenta from "../../validacion/validarCrearCuenta";
 import Link from "next/link";
@@ -40,7 +39,21 @@ const Crearcuenta = () => {
       };
 
       await axios.post(usersUrl, nuevoUsuario);
-
+      try {
+        const signupResponse = await axios.put(
+          `${bookscapeback}/mail/signup`,
+          {
+            email: nuevoUsuario.email, 
+          }
+        );
+        // Aquí puedes manejar la respuesta de la solicitud de registro
+        console.log("Respuesta de registro:", signupResponse.data);
+        
+        // Finalmente, redirige al usuario a la página principal u otra página según tus necesidades
+        router.push("/");
+      } catch (signupError) {
+        console.error("Error al enviar el correo:", signupError);
+      }
       router.push("/login");
     } catch (error: any) {
       console.error("Hubo un error al crear el usuario", error);
@@ -50,7 +63,9 @@ const Crearcuenta = () => {
   return (
     <>
       <div className={styles.logo1}>
-      <Link href="/"><img className={styles.logo2} src={logo2.src} alt="" /></Link>
+        <Link href="/">
+          <img className={styles.logo2} src={logo2.src} alt="" />
+        </Link>
       </div>
       <div className={styles.container}>
         <h1>Crear Cuenta</h1>

@@ -6,7 +6,8 @@ import { useBookContext } from "@/context/BookContext";
 import Pagination from "@/components/Pagination/Pagination";
 import Filtros from "@/components/Filters/Filters";
 import BooksSlider from "@/components/BookSlider/BookSlider"
-
+import LiveChat from "@/components/LiveChat";
+import baner from "../public/images/baner.gif";
 
 function Home() {
   // Utiliza el hook useBookContext para obtener los datos y funciones del contexto
@@ -35,6 +36,7 @@ function Home() {
       <div className={styles.descriptionDer}>
         <div>
           <h3 className={styles.h1}>Bienvenidos</h3>
+          <span><img src={baner.src} alt="baner" /></span>
 
           <CardsBooks books={currentBooks} />
           <Pagination
@@ -48,6 +50,7 @@ function Home() {
         </div>
         <BooksSlider />
       </div>
+      <LiveChat/>
     </div>
   );
 }

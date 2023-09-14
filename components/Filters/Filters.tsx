@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Filters.module.css";
 import { useFilterContext } from "@/context/FilterContext";
 import Link from "next/link";
+import { useBookContext } from '@/context/BookContext';
 
 type LanguageType = {
   [key: string]: string;
@@ -15,10 +16,17 @@ const Filtros: React.FC = () => {
     uniqueTags,
     uniqueAuthors,
     applyFilters,
+    setBooksFilters,
+    booksFilters,
+    aplyFilters,
+    setAplyFilters,
   } = useFilterContext();
+
+  const {books} = useBookContext();
 
   const [showAllTags, setShowAllTags] = useState(false);
   const [showAllAuthors, setShowAllAuthors] = useState(false);
+  const [resetFilters, setResetFilters] = useState(false);
 
   const toggleShowAllTags = () => {
     setShowAllTags(!showAllTags);
@@ -43,6 +51,20 @@ const Filtros: React.FC = () => {
     de: "Alemán",
   };
 
+  const resetAllFilters = () => {
+    setFilters({
+      price: 50,
+      language: "",
+      selectedTags: [],
+      selectedAuthors: [],
+      rating_ave: 0,
+    });
+    
+    setBooksFilters(books)
+    setResetFilters(true);
+    setAplyFilters(false);
+  };
+  
   return (
     <div className={styles.container}>
       {/* Filtros por precio */}
@@ -72,8 +94,8 @@ const Filtros: React.FC = () => {
         onChange={(e) => setFilters({ ...filters, language: e.target.value })}
       >
         <option value="">Todos los idiomas</option>
-        {uniqueLanguages.map((language) => (
-          <option key={language} value={language}>
+        {uniqueLanguages.map((language, index) => (
+          <option key={index} value={language}>
             {languageNames[language]}
           </option>
         ))}
@@ -81,13 +103,12 @@ const Filtros: React.FC = () => {
       <br />
       <br />
       {/* Filtros por tags */}
-      
       <label style={{ fontWeight: "bold" }}>Genero</label>
       {showAllTags ? (
         uniqueTags.map((tag) => (
           <div key={tag}>
-            <label >
-              <input 
+            <label>
+              <input
                 type="checkbox"
                 value={tag}
                 checked={filters.selectedTags.includes(tag)}
@@ -114,34 +135,37 @@ const Filtros: React.FC = () => {
         ))
       ) : (
         <>
-          {uniqueTags.slice(0, 5).sort().map((tag) => (
-            <div key={tag}>
-              <label>
-                <input
-                  type="checkbox"
-                  value={tag}
-                  checked={filters.selectedTags.includes(tag)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFilters({
-                        ...filters,
-                        selectedTags: [...filters.selectedTags, tag],
-                      });
-                    } else {
-                      setFilters({
-                        ...filters,
-                        selectedTags: filters.selectedTags.filter(
-                          (selectedTag) => selectedTag !== tag
-                        ),
-                      });
-                    }
-                  }}
-                />
-                {tag}
-              </label>
-              <br />
-            </div>
-          ))}
+          {uniqueTags
+            .slice(0, 5)
+            .sort()
+            .map((tag) => (
+              <div key={tag}>
+                <label>
+                  <input
+                    type="checkbox"
+                    value={tag}
+                    checked={filters.selectedTags.includes(tag)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setFilters({
+                          ...filters,
+                          selectedTags: [...filters.selectedTags, tag],
+                        });
+                      } else {
+                        setFilters({
+                          ...filters,
+                          selectedTags: filters.selectedTags.filter(
+                            (selectedTag) => selectedTag !== tag
+                          ),
+                        });
+                      }
+                    }}
+                  />
+                  {tag}
+                </label>
+                <br />
+              </div>
+            ))}
           <button onClick={toggleShowAllTags}>Ver más</button>
           <br />
         </>
@@ -224,51 +248,56 @@ const Filtros: React.FC = () => {
           <br />
         </>
       )}
-      <br/>
+      <br />
       {/* estrellas */}
       <label style={{ fontWeight: "bold" }}>Más valorados</label>
       {[5, 4, 3, 2, 1].map((rating) => (
         <div key={rating} className={styles.ratingOption}>
           <label>
-          <input
+            <input
               type="checkbox"
               value={rating}
               checked={filters.rating_ave === rating}
               onChange={(e) => {
                 if (e.target.checked) {
                   // Deseleccionar la reseña
-                  setFilters({ ...filters, rating_ave: Number(rating) 
-                  });
+                  setFilters({ ...filters, rating_ave: Number(rating) });
                 } else {
                   // Seleccionar la reseña
                   setFilters({
                     ...filters,
-                    rating_ave:1, // Establecer el valor de la reseña seleccionada
+                    rating_ave: 0, // Establecer el valor de la reseña seleccionada
                   });
                 }
               }}
             />
-        
-          {Array.from({ length: 5 }).map((_, index) => (
-        <span
-          key={index}
-          className={index < rating ? styles.starFilled : styles.star}
-        >
-          ★ 
-        </span>
-      ))}
-       {" "} o más       
+            {Array.from({ length: 5 }).map((_, index) => (
+              <span
+                key={index}
+                className={index < rating ? styles.starFilled : styles.star}
+              >
+                ★
+              </span>
+            ))}{" "}
+            o más
           </label>
-          <br/>
+          <br />
         </div>
       ))}
       {/* Botón de aplicar filtros */}
       <br />
-      <Link href="/filtrar">
-        <button className={styles.button} onClick={applyFilters}>
-          Aplicar Filtros
-        </button>
-      </Link>
+      <div className={styles.buttonContainer}>
+        <Link href="/filtrar">
+          <button className={styles.button} onClick={applyFilters}>
+            Aplicar Filtros
+          </button>
+        </Link>
+        <Link href="/">
+          <button className={styles.button} onClick={resetAllFilters}>
+            Restablecer Filtros
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
