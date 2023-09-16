@@ -9,32 +9,29 @@ This project have two repositories:
 
 To run Backend is neccesary create file .env, with this variables:
 
-CLOUDINARY_API_KEY=YourKey
-CLOUDINARY_API_SECRECT=YourSecret
-CLOUDINARY_NAME=YourMane
-MAIL_PASS=YourPass
-MAIL_USER=your@mail.com
-MY_SECRET=YourSecret
-PORT=YourPort
+* CLOUDINARY_API_KEY=YourKey
+* CLOUDINARY_API_SECRECT=YourSecret
+* CLOUDINARY_NAME=YourMane
+* MAIL_PASS=YourPass
+* MAIL_USER=your@mail.com
+* MY_SECRET=YourSecret
+* PORT=YourPort
 ## Railway Data Base Information
-RW_PORTdb=YourPortDB
-RW_URLdb=YourURLdb
-RW_USERdb=YourUSERdb
+* RW_PORTdb=YourPortDB
+* RW_URLdb=YourURLdb
+* RW_USERdb=YourUSERdb
 
 to run local test use cli this commands:
 
-npm install 
-
-npm start
+* npm install
+* npm start
 
 To run FrontEnd is neccesary create file .env.local, with this variables:
 
-NEXT_PUBLIC_BOOKSCAPEBACK=https://your.URL.backend
+* NEXT_PUBLIC_BOOKSCAPEBACK=https://your.URL.backend
 
 to run local test use cli this commands:
 
-npm install 
-
-npm run dev
-
+* npm install
+* npm run dev
 
